@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
-import PostItem from './components/PostItem';
+import PostList from './components/PostList';
+import MyButton from './components/UI/buttons/MyButton';
+import MyInput from './components/UI/inputs/MyInput';
 
 function App() {
 
-  const [posts, setPosts] = useState([
+  const [postsJS, setPostsJS] = useState([
     { id: 1, title: 'JavaScript', body: 'This is my first and main language.' },
-    { id: 2, title: 'Python', body: 'I did not try this language yet.' },
-    { id: 3, title: 'C# + .NET', body: 'I really want to try these thechnologies.' },
+    { id: 2, title: 'JavaScript', body: 'I did not try this language yet.' },
+    { id: 3, title: 'JavaScript', body: 'I really want to try these thechnologies.' },
   ]);
+
+  function createPost(e) {
+    e.preventDefault();
+    // ...
+  }
 
   return (
     <div className="App">
-      {posts.map(post => <PostItem post={post} key={post.id}/>)}
+      <MyInput/>
+      <MyInput/>
+      <MyButton>create</MyButton>
+      <PostList posts={postsJS} title={'JavaScript'}/>
     </div>
   );
 }

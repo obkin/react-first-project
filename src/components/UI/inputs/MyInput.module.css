@@ -1,0 +1,10 @@
+.myInput {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid purple;
+    transition: .2s;
+}
+
+.myInput:hover {
+    scale: 1.02;
+}
