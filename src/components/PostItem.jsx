@@ -1,11 +1,11 @@
 import React from 'react';
 import '../styles/App.css';
 
-const PostItem = ({post}) => {
+const PostItem = ({ post, postId }) => {
     return (
     <div className='post'>
         <div className='post__content'>
-            <strong>{post.id}. {post.title}</strong>
+            <strong>{postId}. {post.title}</strong>
             <div>
                 {post.body}
             </div>

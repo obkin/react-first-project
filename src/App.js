@@ -5,26 +5,49 @@ import MyInput from './components/UI/inputs/MyInput';
 
 function App() {
 
-  const [postsJS, setPostsJS] = useState([
+  const [posts, setPosts] = useState([
     { id: 1, title: 'JavaScript', body: 'This is my first and main language.' },
     { id: 2, title: 'JavaScript', body: 'I did not try this language yet.' },
     { id: 3, title: 'JavaScript', body: 'I really want to try these thechnologies.' },
   ]);
 
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
   function createPost(e) {
     e.preventDefault();
-    // ...
+    
+    if (title && body) {
+      const newPost = {
+        id: Date.now(),
+        title: title,
+        body: body,
+      }
+
+      setPosts([...posts, newPost]);
+      setTitle('');
+      setBody('');
+    }
   }
 
   return (
     <div className="App">
-      <MyInput/>
-      <MyInput/>
-      <MyButton>create</MyButton>
-      <PostList posts={postsJS} title={'JavaScript'}/>
+      <MyInput
+        value={title}
+        onChange={e => setTitle(e.target.value)}
+        type='text'
+        placeholder='Type title'
+      />
+      <MyInput
+        value={body}
+        onChange={e => setBody(e.target.value)}
+        type='text'
+        placeholder='Type title'
+      />
+      <MyButton onClick={createPost}>create</MyButton>
+      <PostList posts={posts} title={'JavaScript'}/>
     </div>
   );
 }
-
 
 export default App;
