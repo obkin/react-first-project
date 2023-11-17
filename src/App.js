@@ -11,41 +11,37 @@ function App() {
     { id: 3, title: 'JavaScript', body: 'I really want to try these thechnologies.' },
   ]);
 
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [post, setPost] = useState({ title: '', body: '' });
 
-  function createPost(e) {
+  function createNewPost(e) {
     e.preventDefault();
     
-    if (title && body) {
-      const newPost = {
-        id: Date.now(),
-        title: title,
-        body: body,
-      }
+    if (post.title !== '' || post.body !== '') {
+      setPosts([ ...posts, { ...post, id: Date.now() } ]);
+      setPost({ title: '', body: '' });
 
-      setPosts([...posts, newPost]);
-      setTitle('');
-      setBody('');
+      console.log(post); // need to delete
     }
   }
 
   return (
     <div className="App">
-      <MyInput
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-        type='text'
-        placeholder='Type title'
-      />
-      <MyInput
-        value={body}
-        onChange={e => setBody(e.target.value)}
-        type='text'
-        placeholder='Type title'
-      />
-      <MyButton onClick={createPost}>create</MyButton>
-      <PostList posts={posts} title={'JavaScript'}/>
+      <form>
+        <MyInput
+          value={post.title}
+          onChange={e => setPost({ ...post, title: e.target.value })}
+          type='text'
+          placeholder='Type title'
+        />
+        <MyInput
+          value={post.body}
+          onChange={e => setPost({ ...post, body: e.target.value })}
+          type='text'
+          placeholder='Type title'
+        />
+        <MyButton onClick={createNewPost}>create</MyButton>
+      </form>
+        <PostList posts={posts} title={'JavaScript'}/>
     </div>
   );
 }
