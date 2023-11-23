@@ -2,7 +2,7 @@ import React from 'react';
 import MyButton from './UI/buttons/MyButton';
 import '../styles/App.css';
 
-const PostItem = ({ post, postId }) => {
+const PostItem = ({ post, postId, remove }) => {
     return (
     <div className='post'>
         <div className='post__content'>
@@ -12,7 +12,7 @@ const PostItem = ({ post, postId }) => {
             </div>
         </div>
             <div className='post__btns'>
-                <MyButton>delete</MyButton>
+                <MyButton onClick={() => remove(post)}>delete</MyButton>
             </div>
     </div>
     );
