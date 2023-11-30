@@ -9,7 +9,7 @@ const PostFrom = ({ create }) => {
     function createNewPost(e) {
       e.preventDefault();
       
-      if (post.title !== '' || post.body !== '') {
+      if (post.title !== '' && post.body !== '') {
         const newPost = {
             ...post, id: Date.now(),
         };
