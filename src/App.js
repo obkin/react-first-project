@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PostList from './components/PostList';
 import PostFrom from './components/PostFrom';
 import MySelect from './components/UI/select/MySelect';
+import MyInput from './components/UI/inputs/MyInput';
 
 function App() {
 
@@ -11,7 +12,18 @@ function App() {
     { id: 3, title: 'Angular', body: 'Framework for JS frontend' },
   ]);
 
-  const [sortedPosts, setSortedPosts] = useState('');
+  const [selectedSort, setSelectedSort] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  function getSortedPosts() {
+    console.log('[!] called function: getSortedPosts'); // delete
+    if (selectedSort) {
+      return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]))
+    }
+    return posts;
+  }
+
+  const sortedPosts = getSortedPosts();
 
   function createPost(newPost) {
     setPosts([...posts, newPost]);
@@ -22,8 +34,7 @@ function App() {
   }
 
   function sortPosts(sortBy) {
-    setSortedPosts(sortBy);
-    setPosts([...posts].sort((a,b) => a[sortBy].localeCompare(b[sortBy])));
+    setSelectedSort(sortBy);
   }
 
   return (
@@ -32,17 +43,27 @@ function App() {
 
         <hr style={{ margin: '25px 0 25px 0' }}/>
 
-        <MySelect
-          value={sortedPosts}
-          onChange={sortPosts}
-          options={[
-            {type: 'title', name: 'by title'},
-            {type: 'body', name: 'by text'},
-          ]}
-        />
+        <div>
+          <MyInput
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder={'Search...'}
+            style={{ width: '100%',  margin: '25px 0 25px 0'}}
+          />
+
+          <MySelect
+            value={selectedSort}
+            onChange={sortPosts}
+            options={[
+              {type: 'title', name: 'by title'},
+              {type: 'body', name: 'by text'},
+            ]}
+            defaultValue={'sort off'}
+          />
+        </div>
 
         {posts.length 
-          ? <PostList remove={removePost} posts={posts} title={'JavaScript'}/> 
+          ? <PostList remove={removePost} posts={sortedPosts} title={'JavaScript'}/> 
           : <h1 style={{ textAlign: 'center', margin: '40px 0 40px 0' }}>There are no any posts</h1>
         }
     </div>
