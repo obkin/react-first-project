@@ -4,19 +4,19 @@ import MyInput from './UI/inputs/MyInput';
 
 const PostFrom = ({ create }) => {
 
-    const [post, setPost] = useState({ title: '', body: '', createdAt: Date.now() });
+    const [post, setPost] = useState({ title: '', body: '' });
 
     function createNewPost(e) {
       e.preventDefault();
       
       if (post.title !== '' && post.body !== '') {
         const newPost = {
-            ...post, id: Date.now(),
+            ...post, id: Date.now(), createdAt: Date.now(),
         };
         create(newPost);
         setPost({ title: '', body: '' });
   
-        console.log(post); // need to delete
+        console.log(newPost); // info
       }
     }
 

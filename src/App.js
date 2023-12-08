@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PostList from './components/PostList';
 import PostFrom from './components/PostFrom';
 import MySelect from './components/UI/select/MySelect';
@@ -15,7 +15,7 @@ function App() {
   const [selectedSort, setSelectedSort] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
-  function getSortedPosts() {
+  const sortedPosts = useMemo(() => {
     console.log('[!] called function: getSortedPosts'); // warning
     if (selectedSort) {
       if (selectedSort !== 'date') {
@@ -26,9 +26,7 @@ function App() {
     } else {
       return posts;
     }
-  }
-
-  const sortedPosts = getSortedPosts();
+  }, [selectedSort, posts]);
 
   function createPost(newPost) {
     setPosts([...posts, newPost]);
