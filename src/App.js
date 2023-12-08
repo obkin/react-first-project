@@ -7,20 +7,25 @@ import MyInput from './components/UI/inputs/MyInput';
 function App() {
 
   const [posts, setPosts] = useState([
-    { id: 1, title: 'React', body: 'This one I am trying to learn' },
-    { id: 2, title: 'Vue', body: 'I do not know nothing about it' },
-    { id: 3, title: 'Angular', body: 'Framework for JS frontend' },
+    { id: 1, title: 'React', body: 'This one I am trying to learn', createdAt: 1502027677085 },
+    { id: 2, title: 'Vue', body: 'I do not know nothing about it', createdAt: 1702027677090 },
+    { id: 3, title: 'Angular', body: 'Framework for JS frontend', createdAt: 1602027677095 },
   ]);
 
   const [selectedSort, setSelectedSort] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
   function getSortedPosts() {
-    console.log('[!] called function: getSortedPosts'); // delete
+    console.log('[!] called function: getSortedPosts'); // warning
     if (selectedSort) {
-      return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]))
+      if (selectedSort !== 'date') {
+        return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]));
+      } else {
+        return [...posts].sort((a,b) => b.createdAt - a.createdAt);
+      }
+    } else {
+      return posts;
     }
-    return posts;
   }
 
   const sortedPosts = getSortedPosts();
@@ -57,6 +62,7 @@ function App() {
             options={[
               {type: 'title', name: 'by title'},
               {type: 'body', name: 'by text'},
+              {type: 'date', name: 'by date'},
             ]}
             defaultValue={'sort off'}
           />

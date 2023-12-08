@@ -4,7 +4,7 @@ import MyInput from './UI/inputs/MyInput';
 
 const PostFrom = ({ create }) => {
 
-    const [post, setPost] = useState({ title: '', body: '' });
+    const [post, setPost] = useState({ title: '', body: '', createdAt: Date.now() });
 
     function createNewPost(e) {
       e.preventDefault();
