@@ -19,4 +19,16 @@
     background: white;
     border: 2px solid purple;
     border-radius: 16px;
+    position: relative;
+}
+
+.myModalCloseBtn {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    color: gray;
+    font-size: 28px;
+    font-weight: 300;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
 }

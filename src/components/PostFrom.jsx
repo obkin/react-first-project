@@ -27,7 +27,7 @@ const PostFrom = ({ create }) => {
                 onChange={e => setPost({ ...post, title: e.target.value })}
                 type='text'
                 placeholder='Title'
-                style={{ width: '100%' }}
+                style={{ width: '100%', marginTop: '25px' }}
             />
             <MyInput
                 value={post.body}
