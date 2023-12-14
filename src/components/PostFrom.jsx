@@ -26,15 +26,17 @@ const PostFrom = ({ create }) => {
                 value={post.title}
                 onChange={e => setPost({ ...post, title: e.target.value })}
                 type='text'
-                placeholder='Type title'
+                placeholder='Title'
+                style={{ width: '100%' }}
             />
             <MyInput
                 value={post.body}
                 onChange={e => setPost({ ...post, body: e.target.value })}
                 type='text'
-                placeholder='Type title'
+                placeholder='Description'
+                style={{ width: '100%' }}
             />
-            <MyButton onClick={createNewPost}>create</MyButton>
+            <MyButton onClick={createNewPost} style={{ marginTop: '15px' }}>create</MyButton>
         </form>
     );
 };
