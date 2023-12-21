@@ -1,34 +1,39 @@
 .myModal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: none;
-    background: rgba(0,0,0, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .myModal.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .myModalContent {
-    padding: 25px;
-    background: white;
-    border: 2px solid purple;
-    border-radius: 16px;
-    position: relative;
+  padding: 25px;
+  background: white;
+  border: 2px solid purple;
+  border-radius: 16px;
+  position: relative;
 }
 
 .myModalCloseBtn {
-    position: absolute;
-    right: 15px;
-    top: 8px;
-    color: gray;
-    font-size: 28px;
-    font-weight: 300;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  color: gray;
+  font-size: 28px;
+  font-weight: 300;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.myModalCloseBtn:hover {
+  scale: 1.2;
 }
