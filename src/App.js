@@ -1,19 +1,17 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostList from './components/PostList';
 import PostFrom from './components/PostFrom';
 import PostFilter from './components/PostFilter';
 import MyModal from './components/UI/modal/MyModal';
 import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './hooks/usePosts';
+import axios from 'axios';
 
 function App() {
 
   const [posts, setPosts] = useState([
-    { id: 1, title: 'React', body: 'This one I am trying to learn', createdAt: 1502027677085 },
-    { id: 2, title: 'Vue', body: 'I do not know nothing about it', createdAt: 1702027677090 },
-    { id: 3, title: 'Angular', body: 'Framework for JS frontend', createdAt: 1602027677095 },
+    { id: 1, title: 'JavaScript', body: 'I love JavaScript' },
   ]);
-
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
@@ -22,6 +20,15 @@ function App() {
     setPosts([...posts, newPost]);
     setModal(false);
   }
+
+  async function fetchPosts() {
+    const response = await axios.get('http://localhost:8870/posts/get-posts');
+    setPosts(response.data);
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   function removePost(post) {
     setPosts(posts.filter(p => p.id !== post.id));
