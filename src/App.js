@@ -9,17 +9,10 @@ import axios from 'axios';
 
 function App() {
 
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'JavaScript', body: 'I love JavaScript' },
-  ]);
+  const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-
-  function createPost(newPost) {
-    setPosts([...posts, newPost]);
-    setModal(false);
-  }
 
   async function fetchPosts() {
     const response = await axios.get('http://localhost:8870/posts/get-posts');
@@ -29,6 +22,11 @@ function App() {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  function createPost(newPost) {
+    setPosts([...posts, newPost]);
+    setModal(false);
+  }
 
   function removePost(post) {
     setPosts(posts.filter(p => p.id !== post.id));
