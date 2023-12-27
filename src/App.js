@@ -6,6 +6,7 @@ import MyModal from './components/UI/modal/MyModal';
 import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './hooks/usePosts';
 import PostsService from './API/PostsService';
+import { useFetching } from './hooks/useFetching';
 
 function App() {
 
@@ -13,16 +14,10 @@ function App() {
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
-
-  async function fetchPosts() {
-    setIsPostsLoading(true);
-    setTimeout(async () => {
-        const posts = await PostsService.getAllPosts();
-        setPosts(posts);
-      setIsPostsLoading(false);
-    }, 1000);
-  }
+  const [fetchPosts, isPostsLoading, postsError] = useFetching(async () => {
+      const posts = await PostsService.getAllPosts();
+      setPosts(posts);
+  });
 
   useEffect(() => {
     fetchPosts();
@@ -54,7 +49,10 @@ function App() {
 
         <hr style={{ margin: '25px 0 25px 0' }}/>
 
-        <PostList remove={removePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'JavaScript'}/>
+        {postsError
+          ? <h1 style={{ textAlign: 'center', marginTop: '40px' }}>Error: {postsError}</h1>
+          : <PostList remove={removePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'JavaScript'}/>
+        }
     </div>
   );
 }
