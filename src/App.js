@@ -5,7 +5,7 @@ import PostFilter from './components/PostFilter';
 import MyModal from './components/UI/modal/MyModal';
 import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './hooks/usePosts';
-import axios from 'axios';
+import PostsService from './API/PostsService';
 
 function App() {
 
@@ -15,8 +15,8 @@ function App() {
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   async function fetchPosts() {
-    const response = await axios.get('http://localhost:8870/posts/get-posts');
-    setPosts(response.data);
+    const posts = await PostsService.getAllPosts();
+    setPosts(posts);
   }
 
   useEffect(() => {
