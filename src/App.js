@@ -13,10 +13,15 @@ function App() {
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
 
   async function fetchPosts() {
-    const posts = await PostsService.getAllPosts();
-    setPosts(posts);
+    setIsPostsLoading(true);
+    setTimeout(async () => {
+        const posts = await PostsService.getAllPosts();
+        setPosts(posts);
+      setIsPostsLoading(false);
+    }, 1000);
   }
 
   useEffect(() => {
@@ -49,7 +54,7 @@ function App() {
 
         <hr style={{ margin: '25px 0 25px 0' }}/>
 
-        <PostList remove={removePost} posts={sortedAndSearchedPosts} title={'JavaScript'}/>
+        <PostList remove={removePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'JavaScript'}/>
     </div>
   );
 }

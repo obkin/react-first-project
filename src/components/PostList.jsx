@@ -1,13 +1,15 @@
 import React from 'react';
 import PostItem from './PostItem';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import Loader from './UI/Loader/Loader';
 
-const PostList = ({ posts, title, remove }) => {
+const PostList = ({ posts, title, remove, isLoading }) => {
     return (
         <div>
-            <h1 style={{ textAlign: 'center', marginTop: '40px' }}>
-                {posts.length ? title : <div>There are no any posts</div>}
-            </h1>
+            {isLoading
+                ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}><Loader/></div>
+                : <h1 style={{ textAlign: 'center', marginTop: '40px' }}>{posts.length ? title : <div>There are no any posts</div>}</h1>
+            }
             <TransitionGroup>
                 {posts.map((post, index) => 
                     <CSSTransition key={post.id} timeout={500} classNames='post'>
