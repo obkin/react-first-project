@@ -7,6 +7,7 @@ import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './hooks/usePosts';
 import PostsService from './API/PostsService';
 import { useFetching } from './hooks/useFetching';
+import axios from 'axios';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  
   const [fetchPosts, isPostsLoading, postsError] = useFetching(async () => {
       const posts = await PostsService.getAllPosts();
       setPosts(posts);
@@ -23,13 +25,15 @@ function App() {
     fetchPosts();
   }, []);
 
-  function createPost(newPost) {
-    setPosts([...posts, newPost]);
+  async function createPost(newPost) {
+    await PostsService.createPost(newPost);
     setModal(false);
+    fetchPosts();
   }
 
-  function removePost(post) {
-    setPosts(posts.filter(p => p.id !== post.id));
+  async function removePost(postId) {
+    await PostsService.removePost(postId);
+    fetchPosts();
   }
 
   return (

@@ -10,13 +10,10 @@ const PostFrom = ({ create }) => {
       e.preventDefault();
       
       if (post.title !== '' && post.body !== '') {
-        const newPost = {
-            ...post, id: Date.now(), createdAt: Date.now(),
-        };
-        create(newPost);
+        create(post);
         setPost({ title: '', body: '' });
   
-        console.log(newPost); // info
+        console.log(post); // info
       }
     }
 
