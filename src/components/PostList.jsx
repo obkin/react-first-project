@@ -3,7 +3,7 @@ import PostItem from './PostItem';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Loader from './UI/Loader/Loader';
 
-const PostList = ({ posts, title, remove, isLoading }) => {
+const PostList = ({ posts, title, remove, update, isLoading }) => {
     return (
         <div>
             {isLoading
@@ -13,7 +13,7 @@ const PostList = ({ posts, title, remove, isLoading }) => {
             <TransitionGroup>
                 {posts.map((post, index) => 
                     <CSSTransition key={post.id} timeout={500} classNames='post'>
-                        <PostItem remove={remove} post={post} postNumber={index + 1}/>
+                        <PostItem remove={remove} update={update} post={post} postNumber={index + 1}/>
                     </CSSTransition>    
                 )}
             </TransitionGroup>

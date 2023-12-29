@@ -26,6 +26,16 @@ button {
     margin: 15px;
     padding: 15px;
 }
+.post__content {
+    max-width: 90%;
+    padding-right: 10px;
+    /* border: 2px solid red; */
+}
+.post__btns {
+    max-width: 10%;
+    text-align: center;
+    /* border: 2px solid green; */
+}
 .post-enter {
 opacity: 0;
 }

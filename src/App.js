@@ -7,7 +7,6 @@ import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './hooks/usePosts';
 import PostsService from './API/PostsService';
 import { useFetching } from './hooks/useFetching';
-import axios from 'axios';
 
 function App() {
 
@@ -36,10 +35,16 @@ function App() {
     fetchPosts();
   }
 
+  async function updatePost(postId, updatedData) {
+    console.log(postId, updatedData);
+    await PostsService.updatePost(postId, updatedData);
+    fetchPosts();
+  }
+
   return (
     <div className="App">
         <MyModal visible={modal} setVisible={setModal}>
-          <PostFrom create={createPost}/>
+          <PostFrom func={createPost} btnName={'create'}/>
         </MyModal>
 
         <MyButton onClick={() => setModal(true)} style={{ marginTop: '30px' }}>
@@ -55,7 +60,7 @@ function App() {
 
         {postsError
           ? <h1 style={{ textAlign: 'center', marginTop: '40px' }}>Error: {postsError}</h1>
-          : <PostList remove={removePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'JavaScript'}/>
+          : <PostList remove={removePost} update={updatePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'JavaScript'}/>
         }
     </div>
   );

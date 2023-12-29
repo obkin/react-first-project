@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MyButton from './UI/buttons/MyButton';
 import MyInput from './UI/inputs/MyInput';
 
-const PostFrom = ({ create }) => {
+const PostFrom = ({ func, btnName, postId }) => {
 
     const [post, setPost] = useState({ title: '', body: '' });
 
@@ -10,10 +10,13 @@ const PostFrom = ({ create }) => {
       e.preventDefault();
       
       if (post.title !== '' && post.body !== '') {
-        create(post);
+        func(post);
         setPost({ title: '', body: '' });
-  
-        console.log(post); // info
+      }
+
+      if (postId) {
+        func(postId, post);
+        setPost({ title: '', body: '' });
       }
     }
 
@@ -33,7 +36,7 @@ const PostFrom = ({ create }) => {
                 placeholder='Description'
                 style={{ width: '100%' }}
             />
-            <MyButton onClick={createNewPost} style={{ marginTop: '15px' }}>create</MyButton>
+            <MyButton onClick={createNewPost} style={{ marginTop: '15px' }}>{btnName}</MyButton>
         </form>
     );
 };
