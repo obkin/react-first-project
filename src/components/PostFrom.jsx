@@ -9,7 +9,7 @@ const PostFrom = ({ func, btnName, postId }) => {
     function createNewPost(e) {
       e.preventDefault();
       
-      if (post.title !== '' && post.body !== '') {
+      if (post.title !== '' && post.body !== '' && !postId) {
         func(post);
         setPost({ title: '', body: '' });
       }
