@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostList from './components/PostList';
 import PostFrom from './components/PostFrom';
 import PostFilter from './components/PostFilter';
@@ -17,11 +17,8 @@ function App() {
   const [totalPostsCount, setTotalPostsCount] = useState(0);
   const [postsPerPageLimit, setPostsPerPageLimit] = useState(10);
   const [pageNumber, setPageNumber] = useState(4);
-
   const pagesCounter = usePagination(totalPostsCount, postsPerPageLimit);
-
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  
   const [fetchPosts, isPostsLoading, postsError] = useFetching(async () => {
       const response = await PostsService.getAllPosts(postsPerPageLimit, pageNumber);
       setPosts(response.data);
