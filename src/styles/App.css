@@ -50,3 +50,22 @@ opacity: 1;
 opacity: 0;
 transition: opacity 500ms ease-in;
 }
+
+.page {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid purple;
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.101);
+    cursor: pointer;
+}
+.pages__wrapper {
+    padding: 5px;
+    margin: 10px;
+}
+.page-active {
+    border: 2px solid orange;
+    font-weight: bold;
+}

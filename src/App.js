@@ -7,7 +7,7 @@ import MyButton from './components/UI/buttons/MyButton';
 import { usePosts } from './hooks/usePosts';
 import PostsService from './API/PostsService';
 import { useFetching } from './hooks/useFetching';
-import { usePagination } from './hooks/usePagination';
+import Pagination from './components/UI/Pagination/Pagination';
 
 function App() {
 
@@ -15,9 +15,9 @@ function App() {
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const [totalPostsCount, setTotalPostsCount] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [postsPerPageLimit, setPostsPerPageLimit] = useState(10);
-  const [pageNumber, setPageNumber] = useState(4);
-  const pagesCounter = usePagination(totalPostsCount, postsPerPageLimit);
+  const [pageNumber, setPageNumber] = useState(1);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
   const [fetchPosts, isPostsLoading, postsError] = useFetching(async () => {
       const response = await PostsService.getAllPosts(postsPerPageLimit, pageNumber);
@@ -27,7 +27,8 @@ function App() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNumber]);
 
   async function createPost(newPost) {
     await PostsService.createPost(newPost);
@@ -67,9 +68,12 @@ function App() {
           ? <h1 style={{ textAlign: 'center', marginTop: '40px' }}>Error: {postsError}</h1>
           : <PostList remove={removePost} update={updatePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'JavaScript'}/>
         }
-        {pagesCounter.map(p =>
-          <MyButton key={p}>{p}</MyButton>  
-        )}
+        <Pagination
+          totalPostsCount={totalPostsCount}
+          postsPerPageLimit={postsPerPageLimit}
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+        />
     </div>
   );
 }
