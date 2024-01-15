@@ -8,6 +8,7 @@ import { usePosts } from '../hooks/usePosts';
 import PostsService from '../API/PostsService';
 import { useFetching } from '../hooks/useFetching';
 import Pagination from '../components/UI/Pagination/Pagination';
+import '../styles/Posts.css';
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -41,7 +42,6 @@ const Posts = () => {
     }
   
     async function updatePost(postId, updatedData) {
-      console.log(postId, updatedData);                             // delete logging
       await PostsService.updatePost(postId, updatedData);
       fetchPosts();
     }
@@ -61,10 +61,8 @@ const Posts = () => {
             setFilter={setFilter}
           />
   
-          <hr style={{ margin: '25px 0 25px 0' }}/>
-  
           {postsError
-            ? <h1 className='error'>Error: {postsError}</h1>
+            ? <h1 className='posts__error'>Error: {postsError}</h1>
             : <PostList remove={removePost} update={updatePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'JavaScript'}/>
           }
           <Pagination

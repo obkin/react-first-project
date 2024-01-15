@@ -5,12 +5,12 @@ const Pagination = ({ totalPostsCount, postsPerPageLimit, pageNumber, setPageNum
     const pagesCounter = usePagination(totalPostsCount, postsPerPageLimit);
 
     return (
-        <div className='pages__wrapper'>
+        <div className='pageNumber__wrapper'>
             {pagesCounter.map(p =>
             <span 
                 key={p}
                 onClick={() => setPageNumber(p)}
-                className={ pageNumber === p ? 'page page-active' : 'page' }
+                className={ pageNumber === p ? 'pageNumber pageNumber-active' : 'pageNumber' }
             >
                 {p}
             </span> 
