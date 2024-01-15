@@ -1,31 +1,21 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import Posts from "./pages/Posts";
-import Error from "./pages/Error";
+import AppRouter from "./components/AppRouter";
+import Navbar from "./components/UI/Navbar/Navbar"
 
 const App = () => {
   return(
-    <>
+    <div>
       <header>
-        <nav>
-          <Link className="nav__item" to="/">Home</Link>
-          <Link className="nav__item" to="/posts">Posts</Link>
-        </nav>
+        <Navbar/>
       </header>
 
-      <main className="section__main">
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/posts" element={<Posts/>} />
-          <Route path="/error" element={<Error/>} />
-        </Routes>
+      <main>
+        <AppRouter/>
       </main>
 
       <footer>
         <a href="https://github.com/obkin">© 2021 - Created by obkin</a>
       </footer>
-
-    </>
+    </div>
   );
 }
 
