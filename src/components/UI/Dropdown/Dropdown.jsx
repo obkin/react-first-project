@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
+import cl from './Dropdown.module.css';
 
 const Dropdown = ({ dropName, children }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
-
   return (
-    <div className="dropdown">
-      <button onClick={toggleDropdown}>{dropName}</button>
-        {isDropdownOpen && (
-            <div className="dropdown-content">
+      <div className={cl.dropdown}>
+      <button className={cl.dropdown__btn} onClick={() => {setDropdownOpen(!isDropdownOpen)}}>{dropName}</button>
+      {isDropdownOpen && (
+          <div className={cl.dropdown__content}>
+              <div className={cl.dropdown__children}>
                 {children}
-            </div>
-        )}
+              </div>
+          </div>
+      )}
     </div>
   );
 };
