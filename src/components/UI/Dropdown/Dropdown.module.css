@@ -23,6 +23,15 @@
     width: 100px;
     right: 0px;
 }
+.dropdown__content::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: 98px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent rgb(199, 194, 194) transparent transparent;
+}
 .dropdown__children {
     
 }

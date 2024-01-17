@@ -12,15 +12,6 @@ const App = () => {
 
       <main>
         <AppRouter/>
-        
-        {/* <div>
-          <Dropdown dropName='more'>
-            <button>open</button>
-            <button>update</button>
-            <button>delete</button>
-          </Dropdown>
-        </div> */}
-
       </main>
 
       <footer>

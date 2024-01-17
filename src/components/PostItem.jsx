@@ -23,6 +23,7 @@ const PostItem = ({ post, postNumber, remove, update }) => {
                 </MyModal>
 
                 <Dropdown dropName='more'>
+                    <button onClick={() => {}}>open</button>
                     <button onClick={() => remove(post.id)}>delete</button>
                     <button onClick={() => setModal(true)}>update</button>
                 </Dropdown>
