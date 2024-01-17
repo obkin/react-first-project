@@ -1,6 +1,17 @@
 import axios from 'axios';
 
 export default class PostsService {
+
+    static async createPost(newPost) {
+        const response = await axios.post('http://localhost:8870/posts/add-post', newPost);
+        return response;
+    }
+
+    static async getPost(postId) {
+        const response = await axios.get(`http://localhost:8870/posts/get-post/${postId}`);
+        return response;
+    }
+
     static async getAllPosts(limit, page) {
         const response = await axios.get('http://localhost:8870/posts/get-posts', {
             params: {
@@ -8,11 +19,6 @@ export default class PostsService {
                 page,
             }
         });
-        return response;
-    }
-
-    static async createPost(newPost) {
-        const response = await axios.post('http://localhost:8870/posts/add-post', newPost);
         return response;
     }
 

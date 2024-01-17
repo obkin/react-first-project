@@ -1,5 +1,4 @@
 export const getTotalPages = (totalPosts, postsLimit) => {
-    console.log('getTotalPages worked'); // log
     return Math.ceil(totalPosts / postsLimit);
 };
 
@@ -10,6 +9,5 @@ export const createButtonsArray = (totalPages) => {
         res.push(i + 1);
     }
 
-    console.log('createButtonsArray worked'); // log
     return res;
 };
