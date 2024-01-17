@@ -39,7 +39,7 @@ transition: opacity 500ms ease-in;
     margin: 5px;
     padding: 10px;
     font-size: 20px;
-    border: 1px solid purple;
+    border: 2px solid rgb(199, 194, 194);
     border-radius: 5px;
     background-color: rgba(128, 128, 128, 0.101);
     cursor: pointer;

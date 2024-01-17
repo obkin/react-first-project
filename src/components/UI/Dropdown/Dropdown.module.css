@@ -32,9 +32,6 @@
     border-style: solid;
     border-color: transparent rgb(199, 194, 194) transparent transparent;
 }
-.dropdown__children {
-    
-}
 .dropdown__children * {
     width: 100%;
     cursor: pointer;

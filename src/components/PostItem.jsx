@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import MyButton from './UI/buttons/MyButton';
 import MyModal from './UI/modal/MyModal';
 import PostFrom from './PostFrom';
 import '../styles/App.css';
