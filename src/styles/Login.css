@@ -1,0 +1,33 @@
+.login__wrapper {
+    max-width: 800px;
+    height: 250px;
+    border: 2px solid purple;
+    padding: 20px;
+    border-radius: 5px;
+}
+.login__input {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid purple;
+    border-radius: 10px;
+    transition: .2s;
+}
+.login__input:hover {
+    scale: 1.01;
+}
+.login__btn__wrapper {
+    display: flex;
+    justify-content: center;
+}
+.login__btn {
+    padding: 10px;
+    border: 1px solid purple;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
+    margin-top: 20px;
+}
+.login__btn:hover {
+    scale: 1.01;
+}

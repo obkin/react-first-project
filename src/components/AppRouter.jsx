@@ -1,17 +1,18 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
-import Posts from '../pages/Posts';
-import Error from '../pages/Error';
-import PostPage from '../pages/PostPage';
+import { publicRoutes } from '../router/routes';
 
 const AppRouter = () => {
     return (
         <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route exact path="/posts" element={<Posts />} />
-            <Route exact path="/posts/:id" element={<PostPage />} />
-            <Route path="*" element={<Error/>} />
+            {publicRoutes.map(route =>
+                <Route
+                    element={route.component}
+                    path={route.path}
+                    exact={route.exact}
+                    key={route.path}
+                />
+            )}
         </Routes>
     );
 };

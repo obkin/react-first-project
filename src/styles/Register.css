@@ -1,0 +1,34 @@
+.register__wrapper {
+    min-width: 200px;
+    max-width: 400px;
+    height: 300px;
+    border: 2px solid purple;
+    padding: 20px;
+    border-radius: 5px;
+}
+.register__input {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid purple;
+    border-radius: 10px;
+    transition: .2s;
+}
+.register__input:hover {
+    scale: 1.01;
+}
+.register__btn__wrapper {
+    display: flex;
+    justify-content: center;
+}
+.register__btn {
+    padding: 10px;
+    border: 1px solid purple;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
+    margin-top: 20px;
+}
+.register__btn:hover {
+    scale: 1.01;
+}
