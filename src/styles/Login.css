@@ -1,6 +1,6 @@
 .login__wrapper {
     max-width: 800px;
-    height: 250px;
+    height: 280px;
     border: 2px solid purple;
     padding: 20px;
     border-radius: 5px;
@@ -30,4 +30,9 @@
 }
 .login__btn:hover {
     scale: 1.01;
+}
+.login__link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: gray;
 }
