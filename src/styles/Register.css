@@ -32,6 +32,9 @@
 .register__btn:hover {
     scale: 1.01;
 }
+.register__btn__loader {
+    margin-top: 30px;
+}
 .register__link {
     margin-top: 15px;
     font-size: 14px;

@@ -21,6 +21,7 @@ const MyModal = ({ children, visible, setVisible }) => {
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
