@@ -6,7 +6,11 @@ export const useSortedPosts = (posts, sort) => {
           if (sort !== 'date') {
             return [...posts].sort((a,b) => a[sort].localeCompare(b[sort]));
           } else {
-            return [...posts].sort((a,b) => b.createdAt - a.createdAt);
+            return [...posts].sort((a, b) => {
+              const dateA = new Date(a.createdAt);
+              const dateB = new Date(b.createdAt);
+              return dateB.getTime() - dateA.getTime();
+            });
           }
         } else {
           return posts;
