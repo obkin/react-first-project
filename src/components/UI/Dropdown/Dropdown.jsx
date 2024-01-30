@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import cl from './Dropdown.module.css';
 
 const Dropdown = ({ dropName, children }) => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -13,20 +13,28 @@ const Dropdown = ({ dropName, children }) => {
       buttonRef.current &&
       !buttonRef.current.contains(event.target)
     ) {
-      setDropdownOpen(false);
+      setIsDropdownOpen(false);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      setIsDropdownOpen(false);
     }
   };
 
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
   const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -36,7 +44,7 @@ const Dropdown = ({ dropName, children }) => {
       </button>
       {isDropdownOpen && (
         <div className={cl.dropdown__content}>
-          <div className={cl.dropdown__children}>
+          <div className={cl.dropdown__children} onClick={toggleDropdown}>
             {children}
           </div>
         </div>
