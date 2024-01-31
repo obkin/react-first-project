@@ -4,6 +4,7 @@ import UsersService from '../API/UsersService';
 import { useFetching } from '../hooks/useFetching';
 import Loader from '../components/UI/Loader/Loader';
 import MyModal from '../components/UI/modal/MyModal';
+import MyButton from '../components/UI/buttons/MyButton';
 import '../styles/Register.css';
 
 const Register = () => {
@@ -31,7 +32,7 @@ const Register = () => {
         }
     });
 
-    const createNewUser = async () => {
+    const redirectToLogin = async () => {
         // After a successful registration, you might want to redirect the user or perform other actions.
         // Example: history.push('/dashboard');
     };
@@ -88,7 +89,10 @@ const Register = () => {
 
             <MyModal visible={modal} setVisible={setModal}>
                 <div className='register__error'>
-                    {serverError === 422 ? 'Such user already exists' : 'Please, try later'}
+                    {serverError === 422 ? 'This email is already taken' : 'Please, try later'}
+                </div>
+                <div className="register__error__btn">
+                    <MyButton onClick={() => setModal(false)}>OK</MyButton>
                 </div>
             </MyModal>
         </div>
