@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import UsersService from '../API/UsersService';
 import { useFetching } from '../hooks/useFetching';
 import Loader from '../components/UI/Loader/Loader';
+import MyModal from '../components/UI/modal/MyModal';
 import '../styles/Register.css';
 
 const Register = () => {
@@ -10,7 +11,9 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [inputErrors, setInputErrors] = useState({ name: false, email: false, password: false });
-    const [register, isRegisterLoading, registerError] = useFetching(async () => {
+    const [modal, setModal] = useState(false);
+    const [serverError, setServerError] = useState(null);
+    const [register, isRegisterLoading] = useFetching(async () => {
         if (name === '') {
             setInputErrors((prevErrors) => ({ ...prevErrors, name: true }));
         } else if (email === '') {
@@ -18,8 +21,13 @@ const Register = () => {
         } else if (password === '') {
             setInputErrors((prevErrors) => ({ ...prevErrors, password: true }));
         } else {
-            const response = await UsersService.createUser(name, email, password);
-            console.log(response);
+            try {
+                const response = await UsersService.createUser(name, email, password);
+                console.log(response);
+            } catch (e) {
+                setServerError(e.response.status);
+                setModal(true);
+            }
         }
     });
 
@@ -78,10 +86,11 @@ const Register = () => {
                 </div>
             </form>
 
-            <div className='register__error'>
-
-            </div>
-
+            <MyModal visible={modal} setVisible={setModal}>
+                <div className='register__error'>
+                    {serverError === 422 ? 'Such user already exists' : 'Please, try later'}
+                </div>
+            </MyModal>
         </div>
     );
 };
