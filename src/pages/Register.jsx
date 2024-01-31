@@ -23,6 +23,7 @@ const Register = () => {
         } else if (password === '') {
             setInputErrors((prevErrors) => ({ ...prevErrors, password: true }));
         } else {
+            setServerError(null);
             try {
                 await UsersService.createUser(name, email, password);
                 setModal(true);
