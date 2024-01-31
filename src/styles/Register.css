@@ -44,10 +44,11 @@
     font-size: 14px;
     color: gray;
 }
-.register__error {
+.register__modal {
     padding: 20px;
     font-size: 24px;
 }
-.register__error__btn {
+.register__modal__btn {
     text-align: center;
+
 }

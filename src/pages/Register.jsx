@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UsersService from '../API/UsersService';
 import { useFetching } from '../hooks/useFetching';
 import Loader from '../components/UI/Loader/Loader';
@@ -8,6 +8,7 @@ import MyButton from '../components/UI/buttons/MyButton';
 import '../styles/Register.css';
 
 const Register = () => {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,8 +24,8 @@ const Register = () => {
             setInputErrors((prevErrors) => ({ ...prevErrors, password: true }));
         } else {
             try {
-                const response = await UsersService.createUser(name, email, password);
-                console.log(response);
+                await UsersService.createUser(name, email, password);
+                setModal(true);
             } catch (e) {
                 setServerError(e.response.status);
                 setModal(true);
@@ -88,12 +89,28 @@ const Register = () => {
             </form>
 
             <MyModal visible={modal} setVisible={setModal}>
-                <div className='register__error'>
-                    {serverError === 422 ? 'This email is already taken' : 'Please, try later'}
-                </div>
-                <div className="register__error__btn">
-                    <MyButton onClick={() => setModal(false)}>OK</MyButton>
-                </div>
+                {serverError
+                    ? (
+                        <div>
+                            <div className="register__modal">
+                                {serverError === 422 ? 'This email is already taken' : 'Please, try later'}
+                            </div>
+                            <div className="register__modal__btn">
+                                <MyButton onClick={() => setModal(false)}>OK</MyButton>
+                            </div>
+                        </div>
+                    )
+                    : (
+                        <div>
+                            <div className="register__modal">
+                                Registration successful!
+                            </div>
+                            <div className="register__modal__btn">
+                                <MyButton onClick={() => navigate('/login')}>sign in</MyButton>
+                            </div>
+                        </div>
+                    )
+                }
             </MyModal>
         </div>
     );
