@@ -17,6 +17,10 @@
 .register__input:hover {
     scale: 1.01;
 }
+.register__input__error {
+    border: 1px solid red;
+    box-shadow: 0 0 3px red, 0 0 3px red;
+}
 .register__btn__wrapper {
     display: flex;
     justify-content: center;
