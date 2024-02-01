@@ -50,8 +50,9 @@ const Login = () => {
             <form>
                 <input 
                     className={`login__input ${inputErrors.email ? 'login__input__error' : ''}`}
-                    type='text' 
+                    type='email' 
                     placeholder='email'
+                    autoComplete='email'
                     value={email}
                     onChange={(e) => {
                         setEmail(e.target.value);

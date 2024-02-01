@@ -61,8 +61,9 @@ const Register = () => {
                 />
                 <input
                     className={`register__input ${inputErrors.email ? 'register__input__error' : ''}`}
-                    type='text'
+                    type='email'
                     placeholder='email'
+                    autoComplete='email'
                     value={email}
                     onChange={(e) => {
                         setEmail(e.target.value);
