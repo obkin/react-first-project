@@ -1,5 +1,9 @@
+h1 {
+    width: 400px;
+}
 .login__wrapper {
-    max-width: 800px;
+    min-width: 200px;
+    max-width: 400px;
     height: 280px;
     border: 2px solid purple;
     padding: 20px;
@@ -16,6 +20,19 @@
 .login__input:hover {
     scale: 1.01;
 }
+.login__input__password {
+    position: relative;
+}
+.login__input__password__checkbox {
+    position: absolute;
+    right: 10px;
+    top: 27px;
+    z-index: 1;
+}
+.login__input__error {
+    border: 1px solid red;
+    box-shadow: 0 0 3px red, 0 0 3px red;
+}
 .login__btn__wrapper {
     display: flex;
     justify-content: center;
@@ -30,6 +47,9 @@
 }
 .login__btn:hover {
     scale: 1.01;
+}
+.login__btn__loader {
+    margin-top: 30px;
 }
 .login__link {
     margin-top: 15px;

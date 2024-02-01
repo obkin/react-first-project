@@ -1,3 +1,6 @@
+h1 {
+    width: 400px;
+}
 .register__wrapper {
     min-width: 200px;
     max-width: 400px;

@@ -1,19 +1,87 @@
-import React from 'react';
-import '../styles/Login.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useFetching } from '../hooks/useFetching';
+import UsersService from '../API/UsersService';
+import '../styles/Login.css';
+import Loader from '../components/UI/Loader/Loader';
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [inputErrors, setInputErrors] = useState({ name: false, email: false, password: false });
+    const [modal, setModal] = useState(false);
+    const [serverError, setServerError] = useState(null);
+
+    const [login, isLoginLoading] = useFetching(async () => {
+        if (email === '') {
+            setInputErrors((prevErrors) => ({ ...prevErrors, email: true }));
+        } else if (password === '' || password.length < 8) {
+            setInputErrors((prevErrors) => ({ ...prevErrors, password: true }));
+        } else {
+            setServerError(null);
+            try {
+                const response = await UsersService.authUser(email, password);
+                console.log(response);
+                setModal(true);
+                // setEmail('');
+                // setPassword('');
+            } catch (e) {
+                setServerError(e.response.status);
+                setModal(true);
+            }
+        }
+    });
+
+    const handleCheckboxChange = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className='login__wrapper'>
             <h1>Login</h1>
             <form>
-                <input className='login__input' type='text' placeholder='email'/>
-                <input className='login__input' type='text' placeholder='password'/>
-                <div className='login__btn__wrapper'>
-                    <button className='login__btn'>sign in</button>
+                <input 
+                    className={`login__input ${inputErrors.email ? 'login__input__error' : ''}`}
+                    type='text' 
+                    placeholder='email'
+                    value={email}
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                        setInputErrors((prevErrors) => ({ ...prevErrors, email: false }));
+                    }}
+                />
+                <div className='login__input__password'>
+                    <input
+                        className={`login__input ${inputErrors.password ? 'login__input__error' : ''}`}
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder='password'
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            setInputErrors((prevErrors) => ({ ...prevErrors, password: false }));
+                        }}
+                    />
+                    <input 
+                        className='login__input__password__checkbox'
+                        type="checkbox"
+                        checked={showPassword}
+                        onChange={handleCheckboxChange}
+                    />
                 </div>
                 <div className='login__btn__wrapper'>
-                    <Link className="login__link" to="/register">register</Link>
+                    {isLoginLoading ? (
+                        <div className='login__btn__loader'>
+                            <Loader />
+                        </div>
+                    ) : (
+                        <button className='login__btn' type='button' onClick={() => {login()}}>
+                            Sign in
+                        </button>
+                    )}
+                </div>
+                <div className='login__btn__wrapper'>
+                    <Link className="login__link" to="/register">Register</Link>
                 </div>
             </form>
         </div>

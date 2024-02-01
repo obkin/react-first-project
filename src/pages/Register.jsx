@@ -43,7 +43,7 @@ const Register = () => {
 
     const handleCheckboxChange = () => {
         setShowPassword(!showPassword);
-      };
+    };
 
     return (
         <div className='register__wrapper'>
@@ -86,7 +86,7 @@ const Register = () => {
                         checked={showPassword}
                         onChange={handleCheckboxChange}
                     />
-                    </div>
+                </div>
                 <div className='register__btn__wrapper'>
                     {isRegisterLoading ? (
                         <div className='register__btn__loader'>
@@ -98,7 +98,7 @@ const Register = () => {
                         </button>
                     )}
                 </div>
-                <div className='login__btn__wrapper'>
+                <div className='register__btn__wrapper'>
                     {!isRegisterLoading && <Link className="register__link" to="/login">Login</Link>}
                 </div>
             </form>
@@ -121,7 +121,7 @@ const Register = () => {
                                 Registration successful!
                             </div>
                             <div className="register__modal__btn">
-                                <MyButton onClick={() => navigate('/login')}>sign in</MyButton>
+                                <MyButton onClick={() => navigate('/login')}>Sign in</MyButton>
                             </div>
                         </div>
                     )
