@@ -16,17 +16,20 @@ const Register = () => {
     const [modal, setModal] = useState(false);
     const [serverError, setServerError] = useState(null);
     const [register, isRegisterLoading] = useFetching(async () => {
-        if (name === '') {
+        if (name === '' || containsDigits(name)) {
             setInputErrors((prevErrors) => ({ ...prevErrors, name: true }));
         } else if (email === '') {
             setInputErrors((prevErrors) => ({ ...prevErrors, email: true }));
-        } else if (password === '') {
+        } else if (password === '' || password.length < 8) {
             setInputErrors((prevErrors) => ({ ...prevErrors, password: true }));
         } else {
             setServerError(null);
             try {
                 await UsersService.createUser(name, email, password);
                 setModal(true);
+                setName('');
+                setEmail('');
+                setPassword('');
             } catch (e) {
                 setServerError(e.response.status);
                 setModal(true);
@@ -34,10 +37,7 @@ const Register = () => {
         }
     });
 
-    const redirectToLogin = async () => {
-        // After a successful registration, you might want to redirect the user or perform other actions.
-        // Example: history.push('/dashboard');
-    };
+    const containsDigits = (str) => /\d/.test(str);
 
     return (
         <div className='register__wrapper'>
@@ -66,7 +66,7 @@ const Register = () => {
                 <input
                     className={`register__input ${inputErrors.password ? 'register__input__error' : ''}`}
                     type='password'
-                    placeholder='password'
+                    placeholder='password (min 8 char)'
                     value={password}
                     onChange={(e) => {
                         setPassword(e.target.value);

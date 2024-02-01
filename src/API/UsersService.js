@@ -7,7 +7,7 @@ export default class UsersService {
             email,
             password,
         }
-        
+
         const response = await axios.post('http://localhost:8870/users/register', userData);
         return response;
     }
