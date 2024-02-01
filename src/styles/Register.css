@@ -17,6 +17,15 @@
 .register__input:hover {
     scale: 1.01;
 }
+.register__input__password {
+    position: relative;
+}
+.register__input__password__checkbox {
+    position: absolute;
+    right: 10px;
+    top: 27px;
+    z-index: 1;
+}
 .register__input__error {
     border: 1px solid red;
     box-shadow: 0 0 3px red, 0 0 3px red;

@@ -12,9 +12,11 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [inputErrors, setInputErrors] = useState({ name: false, email: false, password: false });
     const [modal, setModal] = useState(false);
     const [serverError, setServerError] = useState(null);
+
     const [register, isRegisterLoading] = useFetching(async () => {
         if (name === '' || containsDigits(name)) {
             setInputErrors((prevErrors) => ({ ...prevErrors, name: true }));
@@ -38,6 +40,10 @@ const Register = () => {
     });
 
     const containsDigits = (str) => /\d/.test(str);
+
+    const handleCheckboxChange = () => {
+        setShowPassword(!showPassword);
+      };
 
     return (
         <div className='register__wrapper'>
@@ -63,16 +69,24 @@ const Register = () => {
                         setInputErrors((prevErrors) => ({ ...prevErrors, email: false }));
                     }}
                 />
-                <input
-                    className={`register__input ${inputErrors.password ? 'register__input__error' : ''}`}
-                    type='password'
-                    placeholder='password (min 8 char)'
-                    value={password}
-                    onChange={(e) => {
-                        setPassword(e.target.value);
-                        setInputErrors((prevErrors) => ({ ...prevErrors, password: false }));
-                    }}
-                />
+                <div className='register__input__password'>
+                    <input
+                        className={`register__input ${inputErrors.password ? 'register__input__error' : ''}`}
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder='password (min 8 char)'
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            setInputErrors((prevErrors) => ({ ...prevErrors, password: false }));
+                        }}
+                    />
+                    <input 
+                        className='register__input__password__checkbox'
+                        type="checkbox"
+                        checked={showPassword}
+                        onChange={handleCheckboxChange}
+                    />
+                    </div>
                 <div className='register__btn__wrapper'>
                     {isRegisterLoading ? (
                         <div className='register__btn__loader'>
