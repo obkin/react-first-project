@@ -10,4 +10,9 @@ export default class UsersService {
         const response = await axios.post('http://localhost:8870/users/login', { email, password });
         return response;
     }
+
+    static async getUserData(email) {
+        const response = await axios.post('http://localhost:8870/users/info', { email });
+        return response;
+    }
 }

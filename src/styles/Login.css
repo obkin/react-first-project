@@ -56,3 +56,10 @@ h1 {
     font-size: 14px;
     color: gray;
 }
+.login__modal {
+    padding: 20px;
+    font-size: 24px;
+}
+.login__modal__btn {
+    text-align: center;
+}

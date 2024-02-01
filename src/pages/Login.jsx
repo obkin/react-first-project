@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFetching } from '../hooks/useFetching';
 import UsersService from '../API/UsersService';
-import '../styles/Login.css';
 import Loader from '../components/UI/Loader/Loader';
+import MyModal from '../components/UI/modal/MyModal';
+import MyButton from '../components/UI/buttons/MyButton';
+import '../styles/Login.css';
 
 const Login = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -23,7 +26,6 @@ const Login = () => {
             try {
                 const response = await UsersService.authUser(email, password);
                 console.log(response);
-                setModal(true);
                 // setEmail('');
                 // setPassword('');
             } catch (e) {
@@ -84,6 +86,17 @@ const Login = () => {
                     <Link className="login__link" to="/register">Register</Link>
                 </div>
             </form>
+
+            <MyModal visible={modal} setVisible={setModal}>
+                <div>
+                    <div className="login__modal">
+                        {serverError === 401 ? 'Wrong email or password' : 'Please, try again'}
+                    </div>
+                    <div className="login__modal__btn">
+                        <MyButton onClick={() => setModal(false)}>OK</MyButton>
+                    </div>
+                </div>
+            </MyModal>
         </div>
     );
 };

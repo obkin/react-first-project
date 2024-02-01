@@ -108,7 +108,7 @@ const Register = () => {
                     ? (
                         <div>
                             <div className="register__modal">
-                                {serverError === 422 ? 'This email is already taken' : 'Please, try later'}
+                                {serverError === 422 ? 'This email is already taken' : 'Please, try again'}
                             </div>
                             <div className="register__modal__btn">
                                 <MyButton onClick={() => setModal(false)}>OK</MyButton>
