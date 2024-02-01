@@ -15,7 +15,7 @@ export const privateRoutes = [
     { path: '/', component: <Home />, exact: true },
     { path: '/posts', component: <Posts />, exact: true },
     { path: '/posts/:id', component: <PostPage />, exact: true },
-    // { path: '/signout', component: <Login />, exact: true },
+    { path: '/login', component: <Login />, exact: true },
     { path: '*', component: <Error />, exact: true },
     // { path: '/user/account', component: <Home />, exact: true },
     // { path: '/user/posts', component: <Home />, exact: true },
