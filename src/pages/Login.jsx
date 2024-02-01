@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFetching } from '../hooks/useFetching';
 import UsersService from '../API/UsersService';
 import Loader from '../components/UI/Loader/Loader';
 import MyModal from '../components/UI/modal/MyModal';
 import MyButton from '../components/UI/buttons/MyButton';
+import { AuthContext } from '../context/context';
 import '../styles/Login.css';
 
 const Login = () => {
+    const {isUserAuthorized, setIsUserAuthorized} = useContext(AuthContext);
+
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +29,8 @@ const Login = () => {
             try {
                 const response = await UsersService.authUser(email, password);
                 console.log(response);
+                setIsUserAuthorized(true);
+                navigate('/posts');
                 // setEmail('');
                 // setPassword('');
             } catch (e) {

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../router/routes';
+import { AuthContext } from '../context/context';
 
 const AppRouter = () => {
-    const [isUserAuthorized, setIsUserAuthorized] = useState(true);
+    const {isUserAuthorized, setIsUserAuthorized} = useContext(AuthContext);
+    console.log(isUserAuthorized);
 
     return (
         isUserAuthorized
