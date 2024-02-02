@@ -9,7 +9,7 @@ import { AuthContext } from '../context/context';
 import '../styles/Login.css';
 
 const Login = () => {
-    const {isUserAuthorized, setIsUserAuthorized} = useContext(AuthContext);
+    const {setIsUserAuthorized} = useContext(AuthContext);
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
