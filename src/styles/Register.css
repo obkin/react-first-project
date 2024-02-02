@@ -1,20 +1,19 @@
-h1 {
+.register__header {
     width: 400px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .register__wrapper {
     min-width: 200px;
     max-width: 400px;
-    height: 330px;
-    border: 2px solid purple;
+    height: 340px;
+    border: 3px solid rgba(21, 14, 21, 0.705);
     padding: 20px;
-    border-radius: 5px;
 }
 .register__input {
     width: 100%;
     margin-top: 15px;
     padding: 10px;
-    border: 1px solid purple;
-    border-radius: 10px;
+    border: 2px solid rgba(21, 14, 21, 0.705);
     transition: .2s;
 }
 .register__input:hover {
@@ -30,8 +29,8 @@ h1 {
     z-index: 1;
 }
 .register__input__error {
-    border: 1px solid red;
-    box-shadow: 0 0 3px red, 0 0 3px red;
+    border: 2px solid red;
+    box-shadow: 0 0 2px red, 0 0 2px red;
 }
 .register__btn__wrapper {
     display: flex;
@@ -39,14 +38,16 @@ h1 {
 }
 .register__btn {
     padding: 10px;
-    border: 1px solid purple;
+    border: 2px solid rgba(21, 14, 21, 0.705);
     border-radius: 10px;
     cursor: pointer;
     transition: .2s;
     margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .register__btn:hover {
     scale: 1.01;
+    background-color: #dddada;
 }
 .register__btn__loader {
     margin-top: 30px;
@@ -55,6 +56,7 @@ h1 {
     margin-top: 15px;
     font-size: 14px;
     color: gray;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .register__modal {
     padding: 20px;

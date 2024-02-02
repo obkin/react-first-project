@@ -47,7 +47,7 @@ const Register = () => {
 
     return (
         <div className='register__wrapper'>
-            <h1>Registration</h1>
+            <h1 className='register__header'>Registration</h1>
             <form>
                 <input
                     className={`register__input ${inputErrors.name ? 'register__input__error' : ''}`}

@@ -43,7 +43,7 @@ const Login = () => {
 
     return (
         <div className='login__wrapper'>
-            <h1>Login</h1>
+            <h1 className='login__header'>Login</h1>
             <form>
                 <input 
                     className={`login__input ${inputErrors.email ? 'login__input__error' : ''}`}
