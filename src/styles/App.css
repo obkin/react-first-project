@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #root {
@@ -16,8 +17,8 @@ header {
     /* position: fixed; */
     width: 100%;
     height: 70px;
-    background-color: rgba(184, 195, 192, 0.445);
-    border-bottom: 1px solid purple;
+    background-color: #dddcdc;
+    border-bottom: 2px solid rgba(21, 14, 21, 0.705);
 }
 nav {
     display: flex;
@@ -41,8 +42,8 @@ footer {
     width: 100%;
     min-height: 100px;
     margin-top: 50px;
-    background-color: rgba(184, 195, 192, 0.445);
-    border-top: 1px solid purple;
+    background-color: #dddcdc;
+    border-top: 2px solid rgba(21, 14, 21, 0.705);
     display: flex;
     justify-content: center;
     align-items: center;
