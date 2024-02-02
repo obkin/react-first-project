@@ -1,6 +1,6 @@
 .myButton {
     padding: 10px;
-    border: 1px solid purple;
+    border: 2px solid rgba(21, 14, 21, 0.705);
     border-radius: 10px;
     cursor: pointer;
     transition: .2s;

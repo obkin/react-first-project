@@ -121,7 +121,7 @@ const Register = () => {
                     : (
                         <div>
                             <div className="register__modal">
-                                Registration successful!
+                                Successful registred!
                             </div>
                             <div className="register__modal__btn">
                                 <MyButton onClick={() => navigate('/login')}>Sign in</MyButton>
