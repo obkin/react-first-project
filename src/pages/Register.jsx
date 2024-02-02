@@ -89,15 +89,17 @@ const Register = () => {
                     />
                 </div>
                 <div className='register__btn__wrapper'>
-                    {isRegisterLoading ? (
-                        <div className='register__btn__loader'>
-                            <Loader />
-                        </div>
-                    ) : (
-                        <button className='register__btn' type='button' onClick={() => {register()}}>
-                            Register
-                        </button>
-                    )}
+                    {isRegisterLoading 
+                        ? (
+                            <div className='register__btn__loader'>
+                                <Loader />
+                            </div>
+                        ) : (
+                            <button className='register__btn' type='button' onClick={() => {register()}}>
+                                Register
+                            </button>
+                        )
+                    }
                 </div>
                 <div className='register__btn__wrapper'>
                     {!isRegisterLoading && <Link className="register__link" to="/login">Login</Link>}

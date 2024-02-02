@@ -27,12 +27,9 @@ const Login = () => {
         } else {
             setServerError(null);
             try {
-                const response = await UsersService.authUser(email, password);
-                console.log(response);
+                await UsersService.authUser(email, password);
                 setIsUserAuthorized(true);
                 navigate('/posts');
-                // setEmail('');
-                // setPassword('');
             } catch (e) {
                 setServerError(e.response.status);
                 setModal(true);
@@ -78,18 +75,20 @@ const Login = () => {
                     />
                 </div>
                 <div className='login__btn__wrapper'>
-                    {isLoginLoading ? (
-                        <div className='login__btn__loader'>
-                            <Loader />
-                        </div>
-                    ) : (
-                        <button className='login__btn' type='button' onClick={() => {login()}}>
-                            Sign in
-                        </button>
-                    )}
+                    {isLoginLoading 
+                        ? (
+                            <div className='login__btn__loader'>
+                                <Loader />
+                            </div>
+                        ) : (
+                            <button className='login__btn' type='button' onClick={() => {login()}}>
+                                Sign in
+                            </button>
+                        )
+                    }
                 </div>
                 <div className='login__btn__wrapper'>
-                    <Link className="login__link" to="/register">Register</Link>
+                    {!isLoginLoading && <Link className="login__link" to="/register">Register</Link>}
                 </div>
             </form>
 
