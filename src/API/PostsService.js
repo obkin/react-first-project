@@ -22,6 +22,19 @@ export default class PostsService {
         return response;
     }
 
+    static async getAllUserPosts(JWT, limit, page) {
+        const response = await axios.get('http://localhost:8870/posts/get-user-posts', {
+            headers: {
+                authorization: `Bearer ${JWT}`,
+            },
+            params: {
+                limit,
+                page,
+            }
+        });
+        return response;
+    }
+
     static async removePost(postId) {
         const response = await axios.delete(`http://localhost:8870/posts/remove-post/${postId}`);
         return response;

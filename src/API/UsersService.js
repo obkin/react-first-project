@@ -8,6 +8,7 @@ export default class UsersService {
 
     static async authUser(email, password) {
         const response = await axios.post('http://localhost:8870/users/login', { email, password });
+        localStorage.setItem("jwt", response.data.jwt);
         return response;
     }
 

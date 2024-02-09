@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PostList from '../components/PostList';
 import PostFrom from '../components/PostFrom';
 import PostFilter from '../components/PostFilter';
@@ -8,9 +8,12 @@ import { usePosts } from '../hooks/usePosts';
 import PostsService from '../API/PostsService';
 import { useFetching } from '../hooks/useFetching';
 import Pagination from '../components/UI/Pagination/Pagination';
+import { JWTContext } from '../context/context';
 import '../styles/Posts.css';
 
-const Posts = () => {
+const UserPosts = () => {
+    const user = useContext(JWTContext);
+
     const [posts, setPosts] = useState([]);
     const [filter, setFilter] = useState({ sort: '', query: '' });
     const [modal, setModal] = useState(false);
@@ -20,11 +23,11 @@ const Posts = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
     const [fetchPosts, isPostsLoading, postsError] = useFetching(async () => {
-        const response = await PostsService.getAllPosts(postsPerPageLimit, pageNumber);
+        const response = await PostsService.getAllUserPosts(user.jwt, postsPerPageLimit, pageNumber);
         setPosts(response.data);
         setTotalPostsCount(response.headers.get('X-Total-Count'));
     });
-  
+
     useEffect(() => {
       fetchPosts();
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,7 +66,7 @@ const Posts = () => {
   
           {postsError
             ? <h1 className='posts__error'>Error: {postsError}</h1>
-            : <PostList remove={removePost} update={updatePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'New posts'}/>
+            : <PostList remove={removePost} update={updatePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'Your posts'}/>
           }
           <Pagination
             totalPostsCount={totalPostsCount}
@@ -75,4 +78,4 @@ const Posts = () => {
     );
 };
 
-export default Posts;
+export default UserPosts;

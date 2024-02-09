@@ -33,6 +33,7 @@ const PostPage = () => {
                         <h1 className='post__page__title'>post #{post.id}</h1>
                         <h2>{post.title}</h2>
                         <h2>{post.body}</h2>
+                        <h5>User: {post.userId}</h5>
                 </div>
                 }
             </div>

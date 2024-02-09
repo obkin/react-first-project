@@ -29,7 +29,7 @@ const Login = () => {
             try {
                 await UsersService.authUser(email, password);
                 setIsUserAuthorized(true);
-                navigate('/posts');
+                navigate('/');
             } catch (e) {
                 setServerError(e.response.status);
                 setModal(true);
