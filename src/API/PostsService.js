@@ -22,10 +22,10 @@ export default class PostsService {
         return response;
     }
 
-    static async getAllUserPosts(JWT, limit, page) {
+    static async getAllUserPosts(limit, page) {
         const response = await axios.get('http://localhost:8870/posts/get-user-posts', {
             headers: {
-                authorization: `Bearer ${JWT}`,
+                authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
             params: {
                 limit,
