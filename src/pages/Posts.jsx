@@ -31,6 +31,8 @@ const Posts = () => {
     }, [pageNumber]);
   
     async function createPost(newPost) {
+      console.log('src/pages/Posts.jsx -> createPost');
+      console.log(newPost);
       await PostsService.createPost(newPost);
       setModal(false);
       fetchPosts();
