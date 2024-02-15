@@ -14,8 +14,12 @@ export default class UsersService {
     }
 
     // require additional authorization (front-end & back-end)
-    static async getUserData(email) {
-        const response = await axios.post('http://localhost:8870/users/info', { email });
+    static async getUserData() {
+        const response = await axios.get('http://localhost:8870/users/info', {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
+            },
+        });
         return response;
     }
 }

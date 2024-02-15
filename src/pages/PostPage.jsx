@@ -8,13 +8,13 @@ import Loader from '../components/UI/Loader/Loader';
 const PostPage = () => {
     const params = useParams();
     const [post, setPost] = useState({});
-    const [fetchByPostId, isLoading, error] = useFetching(async () => {
+    const [getPostByID, isLoading, error] = useFetching(async () => {
         const result = await PostsService.getPost(params.id);
         setPost(result.data);
     });
 
     useEffect(() => {
-        fetchByPostId();
+        getPostByID();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
