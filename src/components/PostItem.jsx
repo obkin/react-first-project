@@ -5,7 +5,7 @@ import PostFrom from './PostFrom';
 import Dropdown from './UI/Dropdown/Dropdown';
 import '../styles/App.css';
 
-const PostItem = ({ post, postNumber, remove, update }) => {
+const PostItem = ({ post, remove, update }) => {
     const [modal, setModal] = useState(false);
     const router = useNavigate();
 
@@ -15,7 +15,7 @@ const PostItem = ({ post, postNumber, remove, update }) => {
             {/* here you should implement images */}
         </div>
         <div className='post__content'>
-            <strong>{postNumber}. {post.title}</strong>
+            <strong>{post.title}</strong>
             <div>
                 {post.body}
             </div>

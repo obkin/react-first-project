@@ -13,6 +13,7 @@ export default class UsersService {
         return response;
     }
 
+    // require additional authorization (front-end & back-end)
     static async getUserData(email) {
         const response = await axios.post('http://localhost:8870/users/info', { email });
         return response;

@@ -63,7 +63,12 @@ const UserPosts = () => {
   
           {postsError
             ? <h1 className='posts__error'>Error: {postsError}</h1>
-            : <PostList remove={removePost} update={updatePost} posts={sortedAndSearchedPosts} isLoading={isPostsLoading} title={'Your posts'}/>
+            : <PostList 
+                remove={removePost} 
+                update={updatePost} 
+                posts={sortedAndSearchedPosts} 
+                isLoading={isPostsLoading} 
+                title={`You have ${totalPostsCount} posts:`}/>
           }
           <Pagination
             totalPostsCount={totalPostsCount}
