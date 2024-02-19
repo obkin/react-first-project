@@ -1,19 +1,14 @@
-.post__page__wrapper {
+.user__page__wrapper {
     max-width: 800px;
 }
-.post__page__content {
+.user__page__content {
     border: 2px solid rgba(21, 14, 21, 0.705);
     border-radius: 5px;
     padding: 0px 20px 20px 20px;
 }
-.post__page__content * {
+.user__page__title {
     margin-top: 20px;
-}
-.post__page__title {
     color: rgba(21, 14, 21, 0.705);
     border-bottom: 2px solid gray;
     padding-bottom: 20px;
-}
-.post__page__userId {
-    color: rgba(21, 14, 21, 0.705);
 }

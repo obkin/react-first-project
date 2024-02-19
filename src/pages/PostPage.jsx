@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PostsService from '../API/PostsService';
-import '../styles/PostPage.css';
 import { useFetching } from '../hooks/useFetching';
 import Loader from '../components/UI/Loader/Loader';
+import '../styles/PostPage.css';
 
 const PostPage = () => {
     const params = useParams();
@@ -30,11 +30,17 @@ const PostPage = () => {
                         <Loader/>
                     : 
                         <div className='post__page__content'>
-                        <h1 className='post__page__title'>post #{post.id}</h1>
-                        <h2>{post.title}</h2>
-                        <h2>{post.body}</h2>
-                        <h5>User: {post.userId}</h5>
-                </div>
+                            <h1 className='post__page__title'>
+                                post #{post.id}
+                            </h1>
+
+                            <h2>{post.title}</h2>
+                            <h2>{post.body}</h2>
+                            
+                            <h5 className='post__page__userId'>
+                                User: {post.userId}
+                            </h5>
+                        </div>
                 }
             </div>
             }
