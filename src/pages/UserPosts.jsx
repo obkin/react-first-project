@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PostList from '../components/PostList';
-import PostFrom from '../components/PostFrom';
+import PostForm from '../components/PostForm';
 import PostFilter from '../components/PostFilter';
 import MyModal from '../components/UI/modal/MyModal';
 import MyButton from '../components/UI/buttons/MyButton';
@@ -49,7 +49,7 @@ const UserPosts = () => {
     return (
       <div className="App">
           <MyModal visible={modal} setVisible={setModal}>
-            <PostFrom func={createPost} btnName={'create'}/>
+            <PostForm func={createPost} btnName={'create'}/>
           </MyModal>
   
           <MyButton onClick={() => setModal(true)} style={{ marginTop: '30px' }}>

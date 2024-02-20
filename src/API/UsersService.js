@@ -22,4 +22,22 @@ export default class UsersService {
         });
         return response;
     }
+
+    static async changeUserName(newName) {
+        const response = await axios.put('', {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
+            },
+        });
+        return response; 
+    }
+
+    static async changeUserEmail(newEmail) {
+        // const response = await axios.put('');
+    }
+
+    // require additional check (front-end & back-end)
+    static async changeUserPass(oldPass, newPass) {
+        // const response = await axios.put('');
+    }
 }

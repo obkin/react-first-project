@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MyButton from './UI/buttons/MyButton';
 import MyInput from './UI/inputs/MyInput';
 
-const PostFrom = ({ func, btnName, postId }) => {
+const PostForm = ({ func, btnName, postId }) => {
 
     const [post, setPost] = useState({ title: '', body: '', userId: localStorage.getItem("userId") });
 
@@ -41,4 +41,4 @@ const PostFrom = ({ func, btnName, postId }) => {
     );
 };
 
-export default PostFrom;
+export default PostForm;

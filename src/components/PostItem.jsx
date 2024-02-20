@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyModal from './UI/modal/MyModal';
-import PostFrom from './PostFrom';
+import PostForm from './PostForm';
 import Dropdown from './UI/Dropdown/Dropdown';
 import '../styles/App.css';
 
@@ -22,7 +22,7 @@ const PostItem = ({ post, remove, update }) => {
         </div>
             <div className='post__btns'>
                 <MyModal visible={modal} setVisible={setModal}>
-                    <PostFrom func={update} btnName={'update'} postId={post.id}/>
+                    <PostForm func={update} btnName={'update'} postId={post.id}/>
                 </MyModal>
 
                 <Dropdown dropName='more'>

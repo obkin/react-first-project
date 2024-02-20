@@ -33,13 +33,13 @@ const UserData = ({ title, data, isChangeble }) => {
         }
     }
 
-    function testInputs() {
-        console.log(change);
-        setChange('');
-        // console.log(oldPass);
-        // setOldPass('');
-        setModal(false);
-    }
+    // function testInputs() {
+    //     console.log(change);
+    //     setChange('');
+    //     // console.log(oldPass);
+    //     // setOldPass('');
+    //     setModal(false);
+    // }
 
     return (
         <div className={cl.wrapper}>
@@ -78,7 +78,7 @@ const UserData = ({ title, data, isChangeble }) => {
                             placeholder={`New ${title}`}
                         />
                 }
-                <MyButton onClick={e => testInputs()}>Change</MyButton>
+                <MyButton onClick={e => changeData()}>Change</MyButton>
             </MyModal>
         </div>
     );
