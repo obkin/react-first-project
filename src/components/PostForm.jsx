@@ -4,12 +4,12 @@ import MyInput from './UI/inputs/MyInput';
 
 const PostForm = ({ func, btnName, postId }) => {
 
-    const [post, setPost] = useState({ title: '', body: '', userId: localStorage.getItem("userId") });
+    const [post, setPost] = useState({ title: '', body: '' });
 
     function createNewPost(e) {
       e.preventDefault();
       
-      if (post.title !== '' && post.body !== '' && post.userId && !postId) {
+      if (post.title !== '' && post.body !== '' && !postId) {
         func(post);
         setPost({ title: '', body: '' });
       }
