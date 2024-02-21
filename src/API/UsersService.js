@@ -24,7 +24,7 @@ export default class UsersService {
     }
 
     static async changeUserName(newName) {
-        const response = await axios.put('', {
+        const response = await axios.put('http://localhost:8870/users/change-name', newName, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('jwt')}`,
             },
