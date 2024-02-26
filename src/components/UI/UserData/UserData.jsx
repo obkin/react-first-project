@@ -5,41 +5,40 @@ import MyButton from '../buttons/MyButton';
 import UsersService from '../../../API/UsersService';
 import cl from './UserData.module.css';
 
-const UserData = ({ title, data, isChangeble }) => {
+const UserData = ({ title, data, isChangeble, refreshInfo }) => {
 
     const [modal, setModal] = useState(false);
     const [change, setChange] = useState('');
     const [oldPass, setOldPass] = useState('');
 
     const changeName = async (newName) => {
-        return await UsersService.changeUserName(newName);
+        const result = await UsersService.changeUserName(newName);
+        refreshInfo(result.data.newName);
+        setModal(false);
+
     };
 
     const changeEmail = async (newEmail) => {
-        return await UsersService.changeUserEmail(newEmail);
+        const result = await UsersService.changeUserEmail(newEmail);
+        refreshInfo(result.data.newName);
+        setModal(false);
     };
 
     const changePassword = async (oldPass, newPass) => {
-        return await UsersService.changeUserPass(oldPass, newPass);
+        const result = await UsersService.changeUserPass(oldPass, newPass);
+        refreshInfo(result.data.newName);
+        setModal(false);
     };
 
     const changeData = () => {
         if (title === 'name') {
-            changeName();
+            changeName(change);
         } else if (title === 'email') {
-            changeEmail();
+            changeEmail(change);
         } else if (title === 'password') {
-            changePassword();
+            changePassword(change);
         }
     }
-
-    // function testInputs() {
-    //     console.log(change);
-    //     setChange('');
-    //     // console.log(oldPass);
-    //     // setOldPass('');
-    //     setModal(false);
-    // }
 
     return (
         <div className={cl.wrapper}>
@@ -78,7 +77,7 @@ const UserData = ({ title, data, isChangeble }) => {
                             placeholder={`New ${title}`}
                         />
                 }
-                <MyButton onClick={e => changeData()}>Change</MyButton>
+                <MyButton onClick={() => changeData()}>Change</MyButton>
             </MyModal>
         </div>
     );

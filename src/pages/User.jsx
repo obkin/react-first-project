@@ -7,6 +7,7 @@ import '../styles/User.css';
 
 const User = () => {
     const [user, setUser] = useState({});
+    const [changed, setChanged] = useState('');
     const [getUser, isLoading, error] = useFetching(async () => {
         const result = await UsersService.getUserData();
         setUser(result.data);
@@ -14,8 +15,17 @@ const User = () => {
 
     useEffect(() => {
         getUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        getUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [changed]);
+
+    function refreshInfo(data) {
+        setChanged(data);
+    }
 
     const getAccCreatedDate = (userCreatedDate) => {
         const accCreatedDate = new Date(userCreatedDate);
@@ -54,18 +64,21 @@ const User = () => {
                                 title='name'
                                 data={user.name}
                                 isChangeble={true}
+                                refreshInfo={refreshInfo}
                             />
 
                             <UserData
                                 title='email'
                                 data={user.email}
                                 isChangeble={true}
+                                refreshInfo={refreshInfo}
                             />
 
                             <UserData
                                 title='password'
                                 data={'xxxxxxx'}
                                 isChangeble={true}
+                                refreshInfo={refreshInfo}
                             />
 
                             <UserData
