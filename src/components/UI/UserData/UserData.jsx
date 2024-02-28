@@ -3,31 +3,48 @@ import MyModal from '../modal/MyModal';
 import MyInput from '../inputs/MyInput';
 import MyButton from '../buttons/MyButton';
 import UsersService from '../../../API/UsersService';
-import cl from './UserData.module.css';
 import { useFetching } from '../../../hooks/useFetching';
+import Loader from '../Loader/Loader';
+import cl from './UserData.module.css';
 
 const UserData = ({ title, data, isChangeble, refreshInfo }) => {
 
     const [modal, setModal] = useState(false);
     const [change, setChange] = useState('');
     const [oldPass, setOldPass] = useState('');
+    const [changeError, setChangeError] = useState();
 
-    const [changeName, isNewNameLoading, nameChangingError] = useFetching(async () => {
-        const result = await UsersService.changeUserName(change);
-        refreshInfo(result.data.newName);
-        setModal(false);
+    const [changeName, isNewNameLoading] = useFetching(async () => {
+        setChangeError(null);
+        try {
+            const result = await UsersService.changeUserName(change);
+            refreshInfo(result.data.newName);
+            setModal(false);
+        } catch (e) {
+            setChangeError(e.message);
+        }
     });
 
-    const [changeEmail, isNewEmailLoading, emailChaningError] = useFetching(async () => {
-        const result = await UsersService.changeUserEmail(change);
-        refreshInfo(result.data.newName);
-        setModal(false);
+    const [changeEmail, isNewEmailLoading] = useFetching(async () => {
+        setChangeError(null);
+        try {
+            const result = await UsersService.changeUserEmail(change);
+            refreshInfo(result.data.newName);
+            setModal(false);
+        } catch (e) {
+            setChangeError(e.message);
+        }
     });
 
-    const [changePassword, isNewPassLoading, passChaningError] = useFetching(async () => {
-        const result = await UsersService.changeUserPass(oldPass, change);
-        refreshInfo(result.data.newName);
-        setModal(false);
+    const [changePassword, isNewPassLoading] = useFetching(async () => {
+        setChangeError(null);
+        try {
+            const result = await UsersService.changeUserPass(oldPass, change);
+            refreshInfo(result.data.newName);
+            setModal(false);
+        } catch (e) {
+            setChangeError(e.message);
+        }
     });
 
     const changeData = () => {
@@ -56,28 +73,58 @@ const UserData = ({ title, data, isChangeble, refreshInfo }) => {
             }
 
             <MyModal visible={modal} setVisible={setModal}>
-                {title === 'password'
-                    ?
-                        <div>
-                            <MyInput 
-                                value={oldPass}
-                                onChange={e => setOldPass(e.target.value)}
-                                placeholder={`Old password`}
-                            />
-                            <MyInput 
-                                value={change}
-                                onChange={e => setChange(e.target.value)}
-                                placeholder={`New password`}
-                            />
-                        </div>
-                    : 
-                        <MyInput 
-                            value={change}
-                            onChange={e => setChange(e.target.value)}
-                            placeholder={`New ${title}`}
-                        />
+                {
+                    isNewNameLoading || isNewEmailLoading || isNewPassLoading
+                        ?
+                            <Loader/>
+                        : 
+                            title === 'password'
+                                ?
+                                    <div>
+                                        {!changeError
+                                            ?
+                                                <div className={cl.modal__wrapper}>
+                                                    <MyInput 
+                                                        value={oldPass}
+                                                        onChange={e => setOldPass(e.target.value)}
+                                                        placeholder={`Old password`}
+                                                    />
+                                                    <MyInput 
+                                                        value={change}
+                                                        onChange={e => setChange(e.target.value)}
+                                                        placeholder={`New password`}
+                                                    />
+                                                    <MyButton onClick={() => changeData()}>Change</MyButton>
+                                                </div>
+                                            :
+                                                <div className={cl.modal__wrapper}>
+                                                    <p>{changeError}.</p>
+                                                    <p>Please, refresh the page and try again.</p>
+                                                    <MyButton onClick={() => {setModal(false); setChangeError(false)}}>OK</MyButton>
+                                                </div>
+                                        }
+                                    </div>
+                                : 
+                                    <div>
+                                        {!changeError
+                                            ?
+                                                <div className={cl.modal__wrapper}>
+                                                    <MyInput 
+                                                        value={change}
+                                                        onChange={e => setChange(e.target.value)}
+                                                        placeholder={`New ${title}`}
+                                                    />
+                                                    <MyButton onClick={() => changeData()}>Change</MyButton>
+                                                </div>
+                                            :
+                                                <div className={cl.modal__wrapper}>
+                                                    <p>{changeError}</p>
+                                                    <p>Please, refresh the page and try again</p>
+                                                    <MyButton onClick={() => {setModal(false); setChangeError(false)}}>OK</MyButton>
+                                                </div>
+                                        }
+                                    </div>
                 }
-                <MyButton onClick={() => changeData()}>Change</MyButton>
             </MyModal>
         </div>
     );

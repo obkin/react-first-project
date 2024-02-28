@@ -1,8 +1,6 @@
 .wrapper {
-    /* border: 2px solid green; */
     margin-top: 10px;
     display: flex;
-    /* justify-content: space-around; */
     align-items: center;
 }
 .title {
@@ -26,4 +24,13 @@
 }
 .btn:hover {
     color: rgb(77, 77, 228);
+}
+.modal__wrapper * {
+    display: block;
+    margin: 0px auto;
+    margin-top: 20px;
+}
+.modal__wrapper p {
+    text-align: center;
+    font-size: 22px;
 }
