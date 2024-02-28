@@ -4,6 +4,7 @@ import MyInput from '../inputs/MyInput';
 import MyButton from '../buttons/MyButton';
 import UsersService from '../../../API/UsersService';
 import cl from './UserData.module.css';
+import { useFetching } from '../../../hooks/useFetching';
 
 const UserData = ({ title, data, isChangeble, refreshInfo }) => {
 
@@ -11,24 +12,23 @@ const UserData = ({ title, data, isChangeble, refreshInfo }) => {
     const [change, setChange] = useState('');
     const [oldPass, setOldPass] = useState('');
 
-    const changeName = async (newName) => {
-        const result = await UsersService.changeUserName(newName);
+    const [changeName, isNewNameLoading, nameChangingError] = useFetching(async () => {
+        const result = await UsersService.changeUserName(change);
         refreshInfo(result.data.newName);
         setModal(false);
+    });
 
-    };
-
-    const changeEmail = async (newEmail) => {
-        const result = await UsersService.changeUserEmail(newEmail);
+    const [changeEmail, isNewEmailLoading, emailChaningError] = useFetching(async () => {
+        const result = await UsersService.changeUserEmail(change);
         refreshInfo(result.data.newName);
         setModal(false);
-    };
+    });
 
-    const changePassword = async (oldPass, newPass) => {
-        const result = await UsersService.changeUserPass(oldPass, newPass);
+    const [changePassword, isNewPassLoading, passChaningError] = useFetching(async () => {
+        const result = await UsersService.changeUserPass(oldPass, change);
         refreshInfo(result.data.newName);
         setModal(false);
-    };
+    });
 
     const changeData = () => {
         if (title === 'name') {
