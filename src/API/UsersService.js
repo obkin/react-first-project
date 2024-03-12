@@ -38,6 +38,11 @@ export default class UsersService {
 
     // require additional check (front-end & back-end)
     static async changeUserPass(oldPass, newPass) {
-        // const response = await axios.put('');
+        const response = await axios.put('http://localhost:8870/users/change-pass', { oldPass, newPass }, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('jwt')}`,
+            },
+        });
+        return response; 
     }
 }

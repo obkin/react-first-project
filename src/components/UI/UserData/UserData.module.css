@@ -25,6 +25,9 @@
 .btn:hover {
     color: rgb(77, 77, 228);
 }
+.loader {
+    padding: 15px;
+}
 .modal__wrapper * {
     display: block;
     margin: 0px auto;
@@ -33,4 +36,16 @@
 .modal__wrapper p {
     text-align: center;
     font-size: 22px;
+}
+.old__password__checkbox {
+    position: absolute;
+    right: 35px;
+    top: 38px;
+    z-index: 1;
+}
+.new__password__checkbox {
+    position: absolute;
+    right: 35px;
+    top: 99px;
+    z-index: 1;
 }

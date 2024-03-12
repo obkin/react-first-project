@@ -12,6 +12,8 @@ const UserData = ({ title, data, isChangeble, refreshInfo }) => {
     const [modal, setModal] = useState(false);
     const [change, setChange] = useState('');
     const [oldPass, setOldPass] = useState('');
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
     const [changeError, setChangeError] = useState();
 
     const [changeName, isNewNameLoading] = useFetching(async () => {
@@ -57,6 +59,14 @@ const UserData = ({ title, data, isChangeble, refreshInfo }) => {
         }
     }
 
+    const handleOldPassCheckbox = () => {
+        setShowOldPassword(!showOldPassword);
+    };
+
+    const handleNewPassCheckbox = () => {
+        setShowNewPassword(!showNewPassword);
+    };
+
     return (
         <div className={cl.wrapper}>
             <h3 className={cl.title}>
@@ -76,7 +86,9 @@ const UserData = ({ title, data, isChangeble, refreshInfo }) => {
                 {
                     isNewNameLoading || isNewEmailLoading || isNewPassLoading
                         ?
-                            <Loader/>
+                            <div className={cl.loader}>
+                                <Loader/>
+                            </div>
                         : 
                             title === 'password'
                                 ?
@@ -87,12 +99,26 @@ const UserData = ({ title, data, isChangeble, refreshInfo }) => {
                                                     <MyInput 
                                                         value={oldPass}
                                                         onChange={e => setOldPass(e.target.value)}
+                                                        type={showOldPassword ? 'text' : 'password'}
                                                         placeholder={`Old password`}
+                                                    />
+                                                    <input 
+                                                        className={cl.old__password__checkbox}
+                                                        type="checkbox"
+                                                        checked={showOldPassword}
+                                                        onChange={handleOldPassCheckbox}
                                                     />
                                                     <MyInput 
                                                         value={change}
                                                         onChange={e => setChange(e.target.value)}
+                                                        type={showNewPassword ? 'text' : 'password'}
                                                         placeholder={`New password`}
+                                                    />
+                                                    <input 
+                                                        className={cl.new__password__checkbox}
+                                                        type="checkbox"
+                                                        checked={showNewPassword}
+                                                        onChange={handleNewPassCheckbox}
                                                     />
                                                     <MyButton onClick={() => changeData()}>Change</MyButton>
                                                 </div>
