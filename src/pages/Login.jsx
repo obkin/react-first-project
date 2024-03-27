@@ -81,7 +81,7 @@ const Login = () => {
                                 <Loader />
                             </div>
                         ) : (
-                            <button className='login__btn' type='button' onClick={() => {login()}}>
+                            <button className='login__btn' type='submit' onClick={() => {login()}}>
                                 Sign in
                             </button>
                         )

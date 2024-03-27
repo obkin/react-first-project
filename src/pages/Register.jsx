@@ -95,7 +95,7 @@ const Register = () => {
                                 <Loader />
                             </div>
                         ) : (
-                            <button className='register__btn' type='button' onClick={() => {register()}}>
+                            <button className='register__btn' type='submit' onClick={() => register()}>
                                 Register
                             </button>
                         )
